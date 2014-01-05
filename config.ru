@@ -1,8 +1,3 @@
-require 'rubygems' 
-require 'bundler'
-
-Bundler.require  
-
-require './geocode' 
+require './geocode'
 
 run GeocodeForFree

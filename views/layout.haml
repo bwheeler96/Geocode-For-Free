@@ -1,12 +1,18 @@
 %html
-	%head
-		%link(href="/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet")
+  %head
+    %link(href="/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet")
 
-	%body
+  %body
 
-		.navbar.navbar-default{ role: 'navigation' }
-			.navbar-header
-				%button
-		
-		.container
-			= yield
+    .container
+      %nav.navbar.navbar-default{ role: 'navigation' }
+        .navbar-header
+          %a.navbar-brand{ href: '/' }
+            Geocode For Free
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li
+              %a{ href: '/v1/docs' }
+                API Docs
+
+      = yield

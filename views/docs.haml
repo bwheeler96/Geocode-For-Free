@@ -1,0 +1,91 @@
+%h1 API Documentation
+
+%h3 Purpose of Geocode For Free
+
+%p
+  The purpose of GeocodeForFree.com is  primarily to provide developers with a simple method of
+  %b batch geocoding.
+
+%p
+  GeocodeForFree.com is not focused on accuracy. We are a quantity-over-quality type service.
+  The goal is to be able to geocode several thousand records with lightning speed and good-enough
+  precision.
+
+%p
+  If you are looking for a service that will give you a to-a-tee geocode, look elsewhere. If you are trying to find
+  geographical patterns in data, you have come to the right place! Let's get started!
+
+%h3 A Simple Geocode
+
+%p
+  Send a GET request to our
+  %code /geocode
+  endpoint.
+
+%p
+  Remember to preface all routes with the API version, in this case
+  %code v1
+
+%p
+  Below is a geocode request for
+  %code Santa Barbara, CA
+
+%pre
+  GET 'http://geocodeforfree.com/v1/geocode?api_key=this_is_my_api_key&location=Santa%20Barbara,%20CA'
+
+%p which returns
+
+%pre
+  :plain
+
+    locations: [
+      {
+        latitude: 34.1024,
+        longitude: -120.1321
+      }
+    ]
+
+%h3 Geocoding in Batch
+
+%p This is where we get to start having real fun. Geocoding in batch is what this engine was designed to do!
+
+%p
+  To geocode in batch you will need to send an array of locations.
+  You will receive an array that corresponds to the locations you sent.
+
+  To learn more about sending an array in an HTTP request, please see
+  %a{ href: 'http://stackoverflow.com/questions/3061273/send-an-array-with-an-http-get', target: '_blank' } this question on stack overflow.
+
+%p
+  All you need to do is send an array-structured
+  %code location
+  parameter. For example the following query
+
+%pre
+  GET 'http://geocodeforfree.com/v1/geocode?api_key=this_is_my_api_key&location[]=Santa%20Barbara,%20CAlocation[]=Canada'
+
+%p will yield
+
+%pre
+  :plain
+    locations: [
+      {
+        latitude: 34.1024,
+        longitude: -120.1321
+      },
+
+      {
+        latitude: 59.3234,
+        longitude: -112.1231
+      }
+    ]
+
+%h3 Thanks for Stopping By
+
+%p
+  That's all for now! Hopefully as the popularity grows, there will be more services to include to GeocodeForFree.com
+
+
+
+
+

@@ -1,29 +1,31 @@
 .row-fluid
-	.col-xs-12.text-center
-		%h1 You Want to Track Data
-		%h3 We're here to help
+  .col-xs-12.text-center
+    %h1 You Want to Track Data
+    %h3 We're here to help
 
-	.col-xs-12
-		%h3 Geocode for free offers a robust geocoding API.
-		%h3 Features include
+  .col-xs-12
+    %h3
+      Geocode for free offers a robust
+      %a{ href: '/v1/docs' } geocoding API.
 
-		%ul
-			%li Geocoding in batches of thousands of queries at once.
-			%li Unlimited requests per day.
-			%li The ability to build the server yourself, for even more geocoding possiblities!
+    %h3 Features include
+    %ul.list-group
+      %li.list-group-item Geocoding in batches of thousands of queries at once.
+      %li.list-group-item Unlimited requests per day.
+      %li.list-group-item The ability to build the server yourself, for even more geocoding possiblities!
 
-	%h2 Enter your email below
-	%h4 An API Key will be emailed to you
-	%h6 Thanks!
+  %h2 Enter your email below
+  %h4 An API Key will be emailed to you
+  %h6 Thanks!
 
-	%form#signup{ action: '/applications', method: :post, role: 'form' } 
-		.form-group
-			%input.form-control{ type: 'email', placeholder: 'Email', name: 'application[email]' }
-	
-		.form-group
-			%textarea.form-control{ placeholder: 'Description of your app (totally optional)', name: 'application[description]' }
+  %form#signup{ action: '/applications', method: :post, role: 'form' } 
+    .form-group
+      %input.form-control{ type: 'email', placeholder: 'Email', name: 'application[email]' }
+  
+    .form-group
+      %textarea.form-control{ placeholder: 'Description of your app (totally optional)', name: 'application[description]' }
 
-		.form-group
-			%input{ type: 'submit', class: 'btn btn-success', value: 'Start Geocoding!' }
+    .form-group
+      %input{ type: 'submit', class: 'btn btn-success', value: 'Start Geocoding!' }
 
 
