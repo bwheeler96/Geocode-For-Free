@@ -16,4 +16,7 @@
               %a{ href: '/v1/docs' }
                 API Docs
 
+      - if params[:success]
+        .alert.alert-success
+          = params[:success]
       = yield

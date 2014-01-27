@@ -1,27 +1,29 @@
 # This is GeocodeForFree
 
+# Explicit requires
 require 'rubygems'
 require 'bundler'
-Bundler.require
+require 'sinatra/redirect_with_flash'
 
-#require "sinatra/activerecord"
+# Bundler
+Bundler.require
 
 # Models & Concerns
 Dir['./models/*.rb'].each do |f| require f end
 
 Dir['./models/concerns/*.rb'].each do |f| require f end
 
+# The heart of the project
 include Geocode
 
 set :database, "sqlite3:///db/geocode.sqlite3"
-enable :sessions
 
 class GeocodeForFree < Sinatra::Base
 
-  register Sinatra::Flash
-  #helpers Sinatra::
+  enable :sessions
 
 	get '/' do
+    #flash.now[:success] = 'Fun!'
 		haml :index
 	end		
 
@@ -43,8 +45,7 @@ class GeocodeForFree < Sinatra::Base
   get '/applications/:confirmation/confirm' do
     @application = Application.find_by_confirmation(params[:confirmation])
     @application.confirm!
-    flash[:success] = 'Thanks. You may now use your API key for Geocoding!'
-    redirect '/', success: 'Thanks. You may now use your API key for Geocoding!'
+    redirect '/?' + { success: 'Thanks. You may now use your API key for Geocoding!' }.to_query
   end
 
   post '/applications' do
@@ -73,5 +74,4 @@ class GeocodeForFree < Sinatra::Base
 	#end
 
 end
-
 
