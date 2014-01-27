@@ -4,7 +4,7 @@ require 'rubygems'
 require 'bundler'
 Bundler.require
 
-require "sinatra/activerecord"
+#require "sinatra/activerecord"
 
 # Models & Concerns
 Dir['./models/*.rb'].each do |f| require f end
@@ -14,10 +14,14 @@ Dir['./models/concerns/*.rb'].each do |f| require f end
 include Geocode
 
 set :database, "sqlite3:///db/geocode.sqlite3"
+enable :sessions
 
 class GeocodeForFree < Sinatra::Base
 
-	get '/' do 
+  register Sinatra::Flash
+  #helpers Sinatra::
+
+	get '/' do
 		haml :index
 	end		
 
@@ -39,7 +43,8 @@ class GeocodeForFree < Sinatra::Base
   get '/applications/:confirmation/confirm' do
     @application = Application.find_by_confirmation(params[:confirmation])
     @application.confirm!
-    'Thanks.'
+    flash[:success] = 'Thanks. You may now use your API key for Geocoding!'
+    redirect '/', success: 'Thanks. You may now use your API key for Geocoding!'
   end
 
   post '/applications' do

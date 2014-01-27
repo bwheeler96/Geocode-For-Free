@@ -3,6 +3,11 @@
     %h1 You Want to Track Data
     %h3 We're here to help
 
+  = flash
+  - if flash[:success]
+    .alert.alert-success
+      = flash[:success]
+
   .col-xs-12
     %h3
       Geocode for free offers a robust
