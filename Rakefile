@@ -1,2 +1,2 @@
 require "sinatra/activerecord/rake"
-require "./geocode"
+require "./geocode_for_free"

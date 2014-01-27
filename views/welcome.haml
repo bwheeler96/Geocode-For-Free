@@ -1,0 +1,19 @@
+%p
+  Welcome to Geocode For Free,
+
+%p
+  We're excited to have you! You're API key is
+
+%p
+  = @application.api_key
+
+%p
+  To confirm your API key and start using your application, click the link below
+  %a{ href: (GeocodeForFree.development? ? "http://localhost:3000/applications/#{@application.confirmation}/confirm" : "http://geocodeforfree.com/applications/#{confirmation}/confirm") }
+    Confirm My API Key!
+
+%p
+  Have fun and happy coding!
+
+%p
+  \-Brian

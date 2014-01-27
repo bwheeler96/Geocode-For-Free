@@ -11,6 +11,8 @@ Dir['./models/*.rb'].each do |f| require f end
 
 Dir['./models/concerns/*.rb'].each do |f| require f end
 
+include Geocode
+
 set :database, "sqlite3:///db/geocode.sqlite3"
 
 class GeocodeForFree < Sinatra::Base
@@ -20,7 +22,10 @@ class GeocodeForFree < Sinatra::Base
 	end		
 
 	get '/v1/geocode' do
-		"Hello Again"
+    georaw = Array(params[:locations])
+    @geodata = batch_geocode(georaw)
+    content_type :json
+    @geodata.to_json
 	end
 
   get '/v1/docs' do
@@ -31,8 +36,27 @@ class GeocodeForFree < Sinatra::Base
     "applications Index"
   end
 
+  get '/applications/:confirmation/confirm' do
+    @application = Application.find_by_confirmation(params[:confirmation])
+    @application.confirm!
+    'Thanks.'
+  end
+
   post '/applications' do
-		"Create Application"
+		begin
+      @application = Application.create!(params[:application])
+      Pony.mail(
+        to: params[:application][:email],
+        from: 'brian@geocodeforfree.com',
+        subject: 'Start geocoding for free!',
+        html_body: haml(:welcome, layout: false)
+      )
+      'Create Application'
+    rescue => e
+      raise e if GeocodeForFree.development?
+      puts e
+      'There was an error making your API key.'
+    end
 	end
 
 	#namespace :v1 do

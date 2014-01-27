@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102053211) do
+ActiveRecord::Schema.define(version: 20140127045115) do
 
   create_table "applications", force: true do |t|
-    t.string "email"
-    t.string "name"
-    t.text   "description"
-    t.string "api_key"
+    t.string   "email"
+    t.string   "name"
+    t.text     "description"
+    t.string   "api_key"
+    t.string   "confirmation"
+    t.datetime "confirmed_at"
   end
 
   create_table "cities", force: true do |t|
