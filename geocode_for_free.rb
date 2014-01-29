@@ -28,10 +28,18 @@ class GeocodeForFree < Sinatra::Base
 	end		
 
 	get '/v1/geocode' do
-    georaw = Array(params[:locations])
-    @geodata = batch_geocode(georaw)
     content_type :json
-    @geodata.to_json
+    if application_signed_in?
+      if current_application.confirmed?
+        georaw = Array(params[:locations])
+        @geodata = batch_geocode(georaw)
+        @geodata.to_json
+      else
+        { error: 'Please confirm your email to begin using Geocode For Free.' }.to_json
+      end
+    else
+      { error: 'You need to include a valid api_key in each request' }.to_json
+    end
 	end
 
   get '/v1/docs' do
@@ -68,6 +76,16 @@ class GeocodeForFree < Sinatra::Base
 	#	end
 	#
 	#end
+
+  private
+
+  def application_signed_in?
+    return !!current_application
+  end
+
+  def current_application
+    return Application.find_by_api_key(params[:api_key])
+  end
 
 end
 
