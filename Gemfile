@@ -7,5 +7,12 @@ gem 'rake'
 gem 'haml'
 gem 'sinatra-contrib'
 gem 'pony'
-gem 'letter_opener'
-gem 'httparty'
+
+group :development do 
+	gem 'letter_opener'
+	gem 'httparty'
+end
+
+group :production do
+	gem 'unicorn'
+end
