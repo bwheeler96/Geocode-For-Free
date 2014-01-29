@@ -3,7 +3,6 @@
 # Explicit requires
 require 'rubygems'
 require 'bundler'
-require 'sinatra/redirect_with_flash'
 
 # Bundler
 Bundler.require
