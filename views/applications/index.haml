@@ -12,3 +12,5 @@
       %td= a.email
       %td= a.api_key
       %td= a.confirmed_at
+      %td
+        %a{ href: "/applications/#{a.id}/delete" } Delete Application

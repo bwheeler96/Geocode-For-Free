@@ -94,9 +94,17 @@ class Admin < Sinatra::Base
     u == 'geocode' && p == 'free'
   end
 
+  use Rack::MethodOverride
+
   get '/applications' do
     @applications = Application.all
     haml :'applications/index'
+  end
+
+  get '/applications/:id/delete' do
+    @application = Application.find(params[:id])
+    @application.destroy!
+    redirect back
   end
 
 end
