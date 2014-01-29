@@ -38,10 +38,6 @@ class GeocodeForFree < Sinatra::Base
     haml :docs
   end
 
-  get '/applications' do
-    "applications Index"
-  end
-
   get '/applications/:confirmation/confirm' do
     @application = Application.find_by_confirmation(params[:confirmation])
     @application.confirm!
@@ -57,11 +53,11 @@ class GeocodeForFree < Sinatra::Base
         subject: 'Start geocoding for free!',
         html_body: haml(:welcome, layout: false)
       )
-      'Create Application'
+      redirect '/?' + { success: 'Thanks for signing up! Check your email to confirm your account and receive your API key.' }.to_query
     rescue => e
-      raise e if GeocodeForFree.development?
+      #raise e if GeocodeForFree.development?
       puts e
-      'There was an error making your API key.'
+      redirect '/?' + { alert: e.message }.to_query
     end
 	end
 
@@ -75,3 +71,15 @@ class GeocodeForFree < Sinatra::Base
 
 end
 
+class Admin < Sinatra::Base
+
+  use Rack::Auth::Basic do |u, p|
+    u == 'geocode' && p == 'free'
+  end
+
+  get '/applications' do
+    @applications = Application.all
+    haml :'applications/index'
+  end
+
+end

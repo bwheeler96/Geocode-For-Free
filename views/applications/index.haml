@@ -1,0 +1,14 @@
+%table.table.table-striped
+
+  %tr
+    -#%th Name
+    %th Email
+    %th API Key
+    %th Confirmed
+
+  - @applications.each do |a|
+    %tr
+      -#%td= a.name
+      %td= a.email
+      %td= a.api_key
+      %td= a.confirmed_at

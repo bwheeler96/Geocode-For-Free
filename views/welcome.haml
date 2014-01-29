@@ -8,7 +8,8 @@
   = @application.api_key
 
 %p
-  To confirm your API key and start using your application, click the link below
+  Before you get started, we need you to confirm your email.
+  %br
   %a{ href: (GeocodeForFree.development? ? "http://localhost:9393/applications/#{@application.confirmation}/confirm" : "http://geocodeforfree.com/applications/#{confirmation}/confirm") }
     Confirm My API Key!
 

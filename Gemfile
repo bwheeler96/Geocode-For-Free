@@ -8,4 +8,4 @@ gem 'haml'
 gem 'sinatra-contrib'
 gem 'pony'
 gem 'letter_opener'
-
+gem 'httparty'

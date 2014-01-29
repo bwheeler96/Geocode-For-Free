@@ -7,4 +7,5 @@ if GeocodeForFree.development?
   }
 end
 
-run GeocodeForFree
+use GeocodeForFree
+run Admin

@@ -2,6 +2,7 @@
   %head
     %link(href="/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet")
     %title Geocode For Free
+    %link{ href: 'http://localhost:9393/favicon.ico', rel: 'SHORTCUT ICON' }
 
   %body
 
@@ -19,4 +20,7 @@
       - if params[:success]
         .alert.alert-success
           = params[:success]
+      - if params[:alert]
+        .alert.alert-danger
+          = params[:alert]
       = yield
